@@ -82,6 +82,29 @@ class TestPreclassifier(unittest.TestCase):
         self.assertEqual(pc.single_query('monkey'), "see")
         self.assertEqual(pc.single_query('ape'), None)
 
+    def test_addition1(self):
+        '''
+        Test the module
+        '''
+
+        # the data
+        df = pd.DataFrame()
+        df['X'] = ['monkey', 'monkey', 'monkey', 'monkey', 'monkey']
+        df['y'] = ['see', 'see', 'see', 'do', 'do']
+
+
+        # initialize the preclassifier
+        pc = Preclassifier(df['X'].tolist(), df['y'].tolist())
+
+        # add
+        pc.add_single_entry("monkey", "do")
+        pc.add_single_entry("monkey", "do")
+
+        # the tests
+        self.assertEqual(pc.single_query('monkey'), "do")
+        self.assertEqual(pc.single_query('ape'), None)
+
+
 # to run as "python3 test_preclassifier.py"
 if __name__ == '__main__':
     unittest.main()
