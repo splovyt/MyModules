@@ -60,6 +60,10 @@ class TestPreclassifier(unittest.TestCase):
         self.assertEqual(pc.multiple_query([[1,2,3,4,"a"], [1,2,3,4,"a"], [1,2,3,4,'a']]), ["see", "see", "see"])
         self.assertEqual(pc.multiple_query(['ape', "ape"]), [None, None])
 
+        self.assertEqual(pc.multiple_query([[1, 2, 3, 4, "a"], [1, 2, 3, 4, "a"], [1, 2, 3, 4, 'a'], "Monkey"]),
+                         ["see", "see", "see", None])
+        self.assertEqual(pc.multiple_query(['ape', "ape", [1, 2, 3, 4, "a"]]), [None, None, "see"])
+
     def test_pandas1(self):
         '''
         Test the module
